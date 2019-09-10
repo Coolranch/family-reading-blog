@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import firebase from 'firebase/app';
+import Login from './components/Login/Login';
 
-function App() {
+const App = ({ history }) => {
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        history.push('/landing');
+      } else {
+        history.push('/login');
+      }
+    });
+  }, [history]);
+
+  let routes = (
+    <Switch>
+      <Route path='/login' component={Login} />
+    </Switch>
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {routes}
     </div>
   );
 }
 
-export default App;
+export default withRouter(App);
