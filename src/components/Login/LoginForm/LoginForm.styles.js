@@ -10,7 +10,7 @@ export const LoginForm = styled('div')`
     background-color: white;
     border-radius: 8px;
     width: 600px;
-    height: 250px;
+    height: 310px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -23,7 +23,8 @@ export const LoginForm = styled('div')`
 `;
 
 export const Logo = styled('img')`
-    width: 210px !important;
-    height: 210px;
+    width: 230px !important;
+    height: 230px;
     margin-right: 25px;
+    margin-top: 20px;
 `;
