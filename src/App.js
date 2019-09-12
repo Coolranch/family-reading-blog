@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Redirect, Route, Switch, withRouter } from 'react-router-dom';
 import { BookProvider } from './contexts/BookContext';
+import { useUser } from './contexts/UserContext';
 import firebase from './shared/firebase';
 import AppBar from './components/AppBar/AppBar';
 import Login from './components/Login/Login';
@@ -8,7 +9,7 @@ import Landing from './components/Landing/Landing';
 import Blog from './components/Blog/Blog';
 
 const App = ({ history }) => {
-  const [user, setUser] = useState(null);
+  const { firebaseUser, setUser } = useUser();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
@@ -20,7 +21,7 @@ const App = ({ history }) => {
         history.push('/login');
       }
     });
-  }, [history]);
+  }, [history, setUser]);
 
   let routes = (
     <Switch>
@@ -29,7 +30,7 @@ const App = ({ history }) => {
     </Switch>
   );
 
-  if (user !== null) {
+  if (firebaseUser !== null) {
     routes = (
       <Switch>
         <BookProvider>
@@ -42,7 +43,7 @@ const App = ({ history }) => {
     );
   }
 
-  return user === null ? (
+  return firebaseUser === null ? (
     <div>{routes}</div>
   ) : (
       <div>

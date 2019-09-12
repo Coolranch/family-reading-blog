@@ -12,7 +12,7 @@ const Book = ({ book, history }) => {
     };
 
     return (
-        <Card onClick={bookClicked}>
+        <Card onClick={bookClicked} style={{ maxHeight: '508.81px' }}>
             <Image src={book.image} wrapped ui={false} />
             <Card.Content>
                 <Card.Header style={{

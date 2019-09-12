@@ -54,7 +54,17 @@ const LoginForm = () => {
                 })
             : firebase.auth().signInWithEmailAndPassword(form.email, form.password)
                 .then(res => {
-                    // No errors
+                    // const user = firebase.auth().currentUser;
+
+                    // user.updateProfile({
+                    //     photoURL: 'https://firebasestorage.googleapis.com/v0/b/family-reading-blog.appspot.com/o/parker-avatar.png?alt=media&token=faa1f9a9-58a4-4064-89f3-636965b68b7b'
+                    // })
+                    //     .then(() => {
+                    //         // Success
+                    //     })
+                    //     .catch(err => {
+                    //         setFirebaseError(err.message);
+                    //     });
                 })
                 .catch(err => {
                     setFirebaseError(getErrorByCode(err.code));
